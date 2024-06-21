@@ -13,10 +13,12 @@ public class JumpgamePanel extends JPanel implements KeyListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
 	private List<Shape> AS = new ArrayList<Shape>();
-	int x = 10;
-	int y = 240;
-	int bw = 20;
-	int bh = 20;
+	private int x = 10;
+	private int y = 240;
+	private int bw = 20;
+	private int bh = 20;
+	private boolean open = true;
+	
 
 	public void randgen(int n) {
 		System.out.println("randgen");
@@ -89,50 +91,42 @@ public class JumpgamePanel extends JPanel implements KeyListener, Runnable {
 
 	}
 
-	public void returnY() {
-		while (true) {
-			try {
-				Thread.sleep(1000);
-				if (y != 240) {
-					y = y + 10;
-					System.out.println("returnYif");
-				}
-				int tmpX = AS.get(0).getX();
-				AS.get(0).setX(tmpX-10);
-				System.out.println("monsterMove");
-				System.out.println("returnY");
-				this.repaint();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+	public void test() {
+		System.out.println("test");
 
-	}
-	
-	public void monsterMove() {
-		System.out.println("monsterMove");
-		while (true) {
-			try {
-				Thread.sleep(1000);
-				this.repaint();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-	}
-	
-	public void runSun() {
-//		monsterMove();
-		returnY();
 	}
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
-		runSun();
+		while (open) {
+			try {
+				Thread.sleep(1000);
+				
+				if (y != 240) {
+					System.out.println("returnYif");
+					y = y + 10;
+				}
+				
+				System.out.println("monsterMove");
+				int tmpX = AS.get(0).getX();
+				AS.get(0).setX(tmpX-10);
+				this.repaint();
+				
+				test();
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public boolean isOpen() {
+		return open;
+	}
+
+	public void setOpen(boolean open) {
+		this.open = open;
 	}
 
 }

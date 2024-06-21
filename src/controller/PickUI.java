@@ -9,11 +9,10 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.jumpgame.JumpgameUI;
+import util.DispositionUI;
 
 import java.awt.GridBagLayout;
 import javax.swing.JButton;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -51,24 +50,20 @@ public class PickUI extends JFrame {
 		int y = (int) ((scrsize.getHeight() - height) / 2);
 		setBounds(100, 100, width, height);
 		setBounds(x, y, width, height);
-		
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 10, 414, 241);
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
-		
-		JButton btnNewButton = new JButton("跳球遊戲");
-		btnNewButton.addMouseListener(new MouseAdapter() {
+
+		JButton btnNewButton_1 = new JButton("跳球遊戲1");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				JumpgameUI frame = new JumpgameUI();
@@ -76,10 +71,13 @@ public class PickUI extends JFrame {
 				dispose();
 			}
 		});
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.fill = GridBagConstraints.VERTICAL;
-		gbc_btnNewButton.gridx = 5;
-		gbc_btnNewButton.gridy = 6;
-		panel.add(btnNewButton, gbc_btnNewButton);
+		panel.add(btnNewButton_1, DispositionUI.setGridBagConstraint(0.33, 0.33, 0, 0, 1, 1));
+
+		JButton btnNewButton_2 = new JButton("跳球遊戲2");
+		panel.add(btnNewButton_2, DispositionUI.setGridBagConstraint(0.33, 0.33, 1, 1, 1, 1));
+
+		JButton btnNewButton_3 = new JButton("跳球遊戲3");
+		panel.add(btnNewButton_3, DispositionUI.setGridBagConstraint(0.33, 0.33, 2, 2, 1, 1));
 	}
+
 }
