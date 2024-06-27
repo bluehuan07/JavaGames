@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import controller.PickUI;
 
-public class FirstUI extends JFrame implements KeyListener, Runnable {
+public class JumpUI extends JFrame implements KeyListener, Runnable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public class FirstUI extends JFrame implements KeyListener, Runnable {
 	 * @throws InterruptedException
 	 */
 	public static void main(String[] args) throws InterruptedException {
-		FirstUI frame = new FirstUI();
+		JumpUI frame = new JumpUI();
 		frame.setVisible(true);
 		frame.setFocusable(true);
 
@@ -39,13 +39,13 @@ public class FirstUI extends JFrame implements KeyListener, Runnable {
 	/**
 	 * Create the frame.
 	 */
-	public FirstUI() {
+	public JumpUI() {
 		super("FirstUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
 		setLocationRelativeTo(null);
 		addKeyListener(this);
-		JOptionPane.showMessageDialog(FirstUI.this, "按空白建開始遊戲");
+		JOptionPane.showMessageDialog(JumpUI.this, "按空白建開始遊戲");
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc;
 		gbl.columnWeights = new double[] { 0.5, 0.5 };
@@ -110,6 +110,7 @@ public class FirstUI extends JFrame implements KeyListener, Runnable {
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
+		int tmpt = 0;
 		try {
 			int Score = 0;
 			while (RB) {
@@ -132,9 +133,16 @@ public class FirstUI extends JFrame implements KeyListener, Runnable {
 						break;
 					}
 				}
-				Thread.sleep(1000);
+				if (tmpt > 80) {
+					Thread.sleep(250);
+				} else if (tmpt > 40) {
+					Thread.sleep(400);
+				} else {
+					Thread.sleep(600);
+				}
+				tmpt++;
 			}
-			JOptionPane.showMessageDialog(FirstUI.this, "結束 得分：" + Score);
+			JOptionPane.showMessageDialog(JumpUI.this, "結束 得分：" + Score);
 			PickUI frame = new PickUI();
 			frame.setVisible(true);
 			dispose();

@@ -19,7 +19,7 @@ public class FakePanel extends JPanel {
 	@Override
 	public void paint(Graphics g) {
 		super.paint(g);
-		System.out.println("RP pc");
+		System.out.println("FP pc");
 		g.fillRect(x, y, WIDTH, HEIGHT);
 	}
 }

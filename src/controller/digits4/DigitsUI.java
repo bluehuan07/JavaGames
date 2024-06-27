@@ -57,7 +57,7 @@ public class DigitsUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
 		setLocationRelativeTo(null);
-
+		JOptionPane.showMessageDialog(DigitsUI.this, "請先決定在1000~9876選一個\n且數字不重複的");
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -110,35 +110,42 @@ public class DigitsUI extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				int tmp = allans[0];
 				i = 0;
-				int inputA = Integer.parseInt(textFA.getText());
-				int inputB = Integer.parseInt(textFB.getText());
-				do {
-					if(inputA+inputB>4) {
-						JOptionPane.showMessageDialog(DigitsUI.this, "輸入錯誤");
-						break;
-					}
-					if(inputA==4) {
-						JOptionPane.showMessageDialog(DigitsUI.this, "答案是："+ tmp +"\n我很厲害吧~~~");
-						JOptionPane.showMessageDialog(DigitsUI.this, "遊戲結束");
-						PickUI frame = new PickUI();
-						frame.setVisible(true);
-						dispose();
-					}
-					if(max==0) {
-						JOptionPane.showMessageDialog(DigitsUI.this, "你484騙我\n請重新開始");
-						DigitsUI frame = new DigitsUI();
-						frame.setVisible(true);
-						dispose();
-					}
-					if (AB(allans[max], tmp, inputA, inputB)) {
-						while (AB(allans[i], tmp, inputA, inputB)) {
-							i++;
+				if (textFA.getText().equals("") || textFB.getText().equals("")) {
+					JOptionPane.showMessageDialog(DigitsUI.this, "請輸入數字");
+				} else {
+					int inputA = Integer.parseInt(textFA.getText());
+					int inputB = Integer.parseInt(textFB.getText());
+					do {
+						if (inputA + inputB > 4) {
+							JOptionPane.showMessageDialog(DigitsUI.this, "輸入錯誤");
+							break;
 						}
-						allans[i] = allans[max];
-					}
-					max--;
-				} while (max > i);
-				lblNewLabel_1.setText("我猜是：" + allans[0]);
+						if (inputA == 4) {
+							JOptionPane.showMessageDialog(DigitsUI.this, "答案是：" + tmp + "\n我很厲害吧~~~");
+							JOptionPane.showMessageDialog(DigitsUI.this, "遊戲結束");
+							PickUI frame = new PickUI();
+							frame.setVisible(true);
+							dispose();
+							break;
+						}
+						if (max == 0) {
+							JOptionPane.showMessageDialog(DigitsUI.this, "你484騙我\n請重新開始");
+							DigitsUI frame = new DigitsUI();
+							frame.setVisible(true);
+							dispose();
+							break;
+						}
+						if (AB(allans[max], tmp, inputA, inputB)) {
+							while (AB(allans[i], tmp, inputA, inputB)) {
+								i++;
+							}
+							allans[i] = allans[max];
+						}
+						max--;
+					} while (max > i);
+					lblNewLabel_1.setText("我猜是：" + allans[0]);
+				}
+
 			}
 		});
 	}
