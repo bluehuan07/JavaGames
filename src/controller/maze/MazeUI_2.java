@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -16,7 +17,10 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 	private FakePanel FP = new FakePanel();
 	private SquarePanel_2 SP = new SquarePanel_2();
 	private Map_2 M2 = new Map_2();
+	private Coin_2 C2 = new Coin_2();
 
+	Random rand= new Random();
+	
 	/**
 	 * Launch the application.
 	 */
@@ -62,6 +66,13 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(M2, gbc);
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		C2.x = rand.nextInt(430);
+		C2.y = rand.nextInt(170);
+		getContentPane().add(C2, gbc);
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		setContentPane(contentPane);
