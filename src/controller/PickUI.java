@@ -6,7 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.digits4.DigitsUI;
-import controller.jumpGame.FirstUI;
+import controller.jumpGame.JumpUI;
+import controller.maze.MazeUI_1;
 import util.DispositionUI;
 
 import java.awt.GridBagLayout;
@@ -60,7 +61,7 @@ public class PickUI extends JFrame {
 		btnNewButton_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				FirstUI frame = new FirstUI();
+				JumpUI frame = new JumpUI();
 				frame.setVisible(true);
 				dispose();
 			}
@@ -78,8 +79,16 @@ public class PickUI extends JFrame {
 			}
 		});
 
-		JButton btnNewButton_3 = new JButton("跳球遊戲3");
+		JButton btnNewButton_3 = new JButton("來走迷宮");
 		panel.add(btnNewButton_3, DispositionUI.setGridBagConstraint(0.33, 0.33, 2, 2, 1, 1));
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				MazeUI_1 frame = new MazeUI_1();
+				frame.setVisible(true);
+				dispose();
+			}
+		});
 	}
 
 }
