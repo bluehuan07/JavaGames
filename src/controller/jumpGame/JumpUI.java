@@ -1,12 +1,17 @@
 package controller.jumpGame;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
 
 import controller.PickUI;
 
@@ -18,11 +23,15 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 	private RectPanel RP = new RectPanel();
 	private FakePanel FP = new FakePanel();
 
+	JLabel lblNewLabel;
+
 	Thread t1 = new Thread(this);
 
 	boolean SB = true;
 	boolean RB = true;
 	boolean EB = false;
+
+	int Score = 0;
 
 	/**
 	 * Launch the application.
@@ -46,10 +55,11 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		setLocationRelativeTo(null);
 		addKeyListener(this);
 		JOptionPane.showMessageDialog(JumpUI.this, "按空白建開始遊戲");
+		
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc;
-		gbl.columnWeights = new double[] { 0.5, 0.5 };
-		gbl.rowWeights = new double[] { 0.1, 0.9 };
+		gbl.columnWeights = new double[] { 1 };
+		gbl.rowWeights = new double[] { 1 };
 		getContentPane().setLayout(gbl);
 
 		gbc = new GridBagConstraints();
@@ -57,11 +67,23 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(BP, gbc);
+		
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(RP, gbc);
+
+		lblNewLabel = new JLabel("分數： " + Score, SwingConstants.CENTER);
+		lblNewLabel.setForeground(Color.black);
+		lblNewLabel.setFont(new Font("微軟正黑體", Font.PLAIN, 25));
+		lblNewLabel.setBounds(10, 57, 125, 45);
+		gbc = new GridBagConstraints();
+		gbc.anchor = GridBagConstraints.NORTHEAST;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(10,0,0,30);
+		getContentPane().add(lblNewLabel, gbc);
 
 	}
 
@@ -112,7 +134,7 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		// TODO Auto-generated method stub
 		int tmpt = 0;
 		try {
-			int Score = 0;
+
 			while (RB) {
 
 				System.out.println("main");
@@ -126,6 +148,7 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 
 				if (RP.x < -55) {
 					Score = Score + 1;
+					lblNewLabel.setText("分數： " + Score);
 				}
 
 				if (BP.y >= 170 && BP.y <= 200) {
