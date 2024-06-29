@@ -16,6 +16,7 @@ public class SquarePanel_1 extends JPanel implements KeyListener {
 	private static final int size = 30;
 	int x = 100; // 小球的預設位置
 	int y = 100;
+	Boolean bons = false;
 
 	public SquarePanel_1() {
 		super();
@@ -38,6 +39,11 @@ public class SquarePanel_1 extends JPanel implements KeyListener {
 		g.setColor(Color.darkGray); // 設定顏色
 		System.out.println("x：" + x + "\ty：" + y);
 		g.fillRect(x, y, size, size); // (x軸, y軸, 球的寬度, 球的高度)
+		if (bons) {
+			g.setColor(Color.yellow);
+			g.fillOval(x+5, y+5, size-10, size-10);
+		}
+		
 	}
 
 	@Override

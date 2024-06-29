@@ -25,7 +25,7 @@ public class Coin_2 extends JPanel {
 		super.paintComponent(g);
 		System.out.println("bpp");
 		g.setColor(Color.yellow);
-		g.fillOval(x, y, 10, 10);
+		g.fillOval(x, y, 30, 30);
 	}
 
 }

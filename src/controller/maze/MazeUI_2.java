@@ -19,8 +19,10 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 	private Map_2 M2 = new Map_2();
 	private Coin_2 C2 = new Coin_2();
 
-	Random rand= new Random();
-	
+	Random rand = new Random();
+
+	int score = 0;
+
 	/**
 	 * Launch the application.
 	 */
@@ -70,9 +72,51 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		C2.x = rand.nextInt(430);
-		C2.y = rand.nextInt(170);
+		C2.x = rand.nextInt(40) * 10;
+		C2.y = rand.nextInt(16) * 10;
+		System.out.println("C2.x = " + C2.x + "\tC2.y = " + C2.y);
 		getContentPane().add(C2, gbc);
+//		contentPane = new JPanel();
+//		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+//		setContentPane(contentPane);
+	}
+
+	public MazeUI_2(int x, int y, boolean spbons,int sc) {
+		super("MazeUI");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(450, 300);
+		setLocationRelativeTo(null);
+
+		addKeyListener(this);
+
+		GridBagLayout gbl = new GridBagLayout();
+		GridBagConstraints gbc;
+		gbl.columnWeights = new double[] { 1 };
+		gbl.rowWeights = new double[] { 1 };
+		getContentPane().setLayout(gbl);
+
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		SP.x = x;
+		SP.y = y;
+		SP.bons = spbons;
+		getContentPane().add(SP, gbc);
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		getContentPane().add(M2, gbc);
+		gbc = new GridBagConstraints();
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		C2.x = rand.nextInt(40) * 10;
+		C2.y = rand.nextInt(16) * 10;
+		System.out.println("C2.x = " + C2.x + "\tC2.y = " + C2.y);
+		getContentPane().add(C2, gbc);
+		this.score = sc;
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		setContentPane(contentPane);
@@ -96,13 +140,20 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		// TODO Auto-generated method stub
 		System.out.println("MU kp：" + e.getKeyCode());
 		SP.keyPressed(e);
+		if (SP.x == C2.x && SP.y == C2.y) {
+			score++;
+			C2.x = rand.nextInt(40) * 10;
+			C2.y = rand.nextInt(16) * 10;
+			System.out.println("C2.x = " + C2.x + "\tC2.y = " + C2.y);
+			C2.repaint();
+		}
 		if (SP.y == -30) {
-			MazeUI_1 frame = new MazeUI_1(SP.x,260);
+			MazeUI_1 frame = new MazeUI_1(SP.x, 260, SP.bons, score);
 			frame.setVisible(true);
 			dispose();
 		}
 		if (SP.y == 270) {
-			MazeUI_1 frame = new MazeUI_1(SP.x,-20);
+			MazeUI_1 frame = new MazeUI_1(SP.x, -20, SP.bons, score);
 			frame.setVisible(true);
 			dispose();
 		}

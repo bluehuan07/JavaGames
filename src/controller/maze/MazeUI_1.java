@@ -20,6 +20,8 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 	private SquarePanel_1 SP = new SquarePanel_1();
 	private Map_1 M1 = new Map_1();
 
+	int score = 0;
+
 	/**
 	 * Launch the application.
 	 */
@@ -67,8 +69,8 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		setContentPane(contentPane);
 	}
-	
-	public MazeUI_1(int x,int y) {
+
+	public MazeUI_1(int x, int y, boolean spbons, int sc) {
 		super("MazeUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
@@ -94,6 +96,8 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(M1, gbc);
+		SP.bons = spbons;
+		this.score = sc;
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		setContentPane(contentPane);
@@ -116,13 +120,23 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		System.out.println("MU kp：" + e.getKeyCode());
-		if(SP.x==400&&SP.y==150&&e.getKeyCode()==37) {
-			JOptionPane.showMessageDialog(MazeUI_1.this, "逃脫成功");
+		if (SP.x == 400 && SP.y == 150 && e.getKeyCode() == 37) {
+			String tmp = "";
+			if (SP.bons) {
+				tmp = "\n恭喜找到彩蛋";
+			}
+			JOptionPane.showMessageDialog(MazeUI_1.this, "逃脫成功！\n金幣得分：" + this.score + tmp);
 			PickUI frame = new PickUI();
 			frame.setVisible(true);
 			dispose();
 		}
 		SP.keyPressed(e);
+
+		if (SP.x == 120 && SP.y == 230 && e.getKeyCode() == 38) {
+			SP.bons = true;
+			SP.repaint();
+		}
+
 //		if (SP.x == -30) {
 //			MazeUI_1 frame = new MazeUI_1(430,SP.y);
 //			frame.setVisible(true);
@@ -134,12 +148,12 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 //			dispose();
 //		}
 		if (SP.y == -30) {
-			MazeUI_2 frame = new MazeUI_2(SP.x,260);
+			MazeUI_2 frame = new MazeUI_2(SP.x, 260, SP.bons, score);
 			frame.setVisible(true);
 			dispose();
 		}
 		if (SP.y == 270) {
-			MazeUI_2 frame = new MazeUI_2(SP.x,-20);
+			MazeUI_2 frame = new MazeUI_2(SP.x, -20, SP.bons, score);
 			frame.setVisible(true);
 			dispose();
 		}
