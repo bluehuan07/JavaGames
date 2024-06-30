@@ -6,9 +6,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.swing.JFrame;
+
+import model.CoinPosition;
 
 public class MazeUI_2 extends JFrame implements KeyListener {
 
@@ -19,9 +23,10 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 	private Map_2 M2 = new Map_2();
 	private CoinPanel CP = new CoinPanel();
 
-	Random rand = new Random();
-
 	int score = 0;
+	List<CoinPosition> LCP = new ArrayList<CoinPosition>();
+	List<Integer> LItmp = new ArrayList<Integer>();
+	Random rand = new Random();
 
 	/**
 	 * Launch the application.
@@ -30,7 +35,7 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MazeUI_2 frame = new MazeUI_2(100, 100,false,0);
+					MazeUI_2 frame = new MazeUI_2(100, 100, false, 0);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,13 +48,15 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 	 * Create the frame.
 	 */
 
-	public MazeUI_2(int x, int y, boolean spbons,int sc) {
+	public MazeUI_2(int x, int y, boolean spbons, int sc) {
 		super("MazeUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
 		setLocationRelativeTo(null);
 
 		addKeyListener(this);
+
+		inputPosition();
 
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc;
@@ -65,24 +72,26 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		SP.y = y;
 		SP.bons = spbons;
 		getContentPane().add(SP, gbc);
-		
+
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(M2, gbc);
-		
+
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		CP.x = rand.nextInt(40) * 10;
-		CP.y = rand.nextInt(16) * 10;
+		int tmp = rand.nextInt(LCP.size());
+		LItmp.add(tmp);
+		CP.x = LCP.get(tmp).getX();
+		CP.y = LCP.get(tmp).getY();
 		System.out.println("C2.x = " + CP.x + "\tC2.y = " + CP.y);
 		getContentPane().add(CP, gbc);
-		
+
 		this.score = sc;
-		
+
 //		contentPane = new JPanel();
 //		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 //		setContentPane(contentPane);
@@ -108,8 +117,17 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 		SP.keyPressed(e);
 		if (SP.x == CP.x && SP.y == CP.y) {
 			score++;
-			CP.x = rand.nextInt(40) * 10;
-			CP.y = rand.nextInt(16) * 10;
+			System.out.println("分數 : " + score);
+			int tmp;
+			do {
+				tmp = rand.nextInt(LCP.size());
+			} while (isLItmp(tmp));
+			if (LItmp.size() > 5) {
+				LItmp.remove(0);
+			}
+			LItmp.add(tmp);
+			CP.x = LCP.get(tmp).getX();
+			CP.y = LCP.get(tmp).getY();
 			System.out.println("CP.x = " + CP.x + "\tCP.y = " + CP.y);
 			CP.repaint();
 		}
@@ -129,6 +147,45 @@ public class MazeUI_2 extends JFrame implements KeyListener {
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void inputPosition() {
+		for (int i = 0; i <= 400; i = i + 10) {
+			for (int j = 0; j <= 160; j = j + 10) {
+				LCP.add(new CoinPosition(i, j));
+			}
+		}
+
+		for (int i = 180; i <= 400; i = i + 10) {
+			for (int j = 170; j <= 180; j = j + 10) {
+				LCP.add(new CoinPosition(i, j));
+			}
+		}
+
+		for (int i = 160; i <= 170; i = i + 10) {
+			for (int j = 170; j <= 230; j = j + 10) {
+				LCP.add(new CoinPosition(i, j));
+			}
+		}
+
+		for (int i = 30; i <= 50; i = i + 10) {
+			for (int j = 180; j <= 230; j = j + 10) {
+				LCP.add(new CoinPosition(i, j));
+			}
+		}
+		for (int i = 0; i <= 50; i = i + 10) {
+			LCP.add(new CoinPosition(i, 170));
+		}
+
+	}
+
+	public boolean isLItmp(int tmp) {
+		for (int i = 0; i < LItmp.size(); i++) {
+			if (tmp == LItmp.get(i)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 }
