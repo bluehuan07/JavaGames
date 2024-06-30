@@ -11,6 +11,8 @@ public class Map_1 extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	Boolean exit = false;
+	
 	public Map_1() {
 		super();
 		this.setBackground(null);
@@ -30,6 +32,10 @@ public class Map_1 extends JPanel {
 		g.setColor(Color.blue);
 		g.fillRect(0, 200, 210, 30);
 		g.fillRect(300, 110, 100, 120);
+		if(exit) {
+			g.setColor(Color.red);
+			g.fillRect(390, 150, 10, 30);
+		}
 	}
 	
 }

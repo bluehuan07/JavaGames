@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
-public class Coin_2 extends JPanel {
+public class CoinPanel extends JPanel {
 
 	/**
 	 * 
@@ -14,7 +14,7 @@ public class Coin_2 extends JPanel {
 	int x = 0;
 	int y = 0;
 	
-	public Coin_2() {
+	public CoinPanel() {
 		super();
 		this.setBackground(null);
 		this.setOpaque(false);
@@ -23,7 +23,7 @@ public class Coin_2 extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		System.out.println("bpp");
+		System.out.println("CoinPanel Paint");
 		g.setColor(Color.yellow);
 		g.fillOval(x, y, 30, 30);
 	}
