@@ -53,6 +53,13 @@ public class PickUI extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 10, 414, 241);
 		contentPane.add(panel);
+		/**
+		 * 本次位置編排皆採用GridBagLayout <br>
+		 * 需要使用 GridBagConstraints 來設置樣式 <br>
+		 * 為了版面所以利用呼叫函數的方式 <br>
+		 * 利用util/DispositionUI.java <br>
+		 * 下方的 DispositionUI.setGridBagConstraint(0.33, 0.33, 0, 0, 1, 1)
+		 */
 		GridBagLayout gbl_panel = new GridBagLayout();
 		panel.setLayout(gbl_panel);
 
@@ -66,7 +73,6 @@ public class PickUI extends JFrame {
 				dispose();
 			}
 		});
-		
 
 		JButton btnNewButton_2 = new JButton("猜猜數字");
 		panel.add(btnNewButton_2, DispositionUI.setGridBagConstraint(0.33, 0.33, 1, 1, 1, 1));

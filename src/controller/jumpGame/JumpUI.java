@@ -55,7 +55,7 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		setLocationRelativeTo(null);
 		addKeyListener(this);
 		JOptionPane.showMessageDialog(JumpUI.this, "按空白建開始遊戲");
-		
+
 		GridBagLayout gbl = new GridBagLayout();
 		GridBagConstraints gbc;
 		gbl.columnWeights = new double[] { 1 };
@@ -67,7 +67,7 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		getContentPane().add(BP, gbc);
-		
+
 		gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridx = 0;
@@ -82,21 +82,23 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		gbc.anchor = GridBagConstraints.NORTHEAST;
 		gbc.gridx = 0;
 		gbc.gridy = 0;
-		gbc.insets = new Insets(10,0,0,30);
+		gbc.insets = new Insets(10, 0, 0, 30);// 與外框的邊界(上,下,左,右)
 		getContentPane().add(lblNewLabel, gbc);
 
 	}
 
+	/**
+	 * 如果都是在paint繪製時圖案皆會閃爍 <br>
+	 * 但是如果不寫內容會沒東西 <br>
+	 * 所以寫一個FakePanel <br>
+	 */
 	@Override
 	public void paint(Graphics g) {
-
 		super.paint(g); // 呼叫從父類JFrame繼承的paint方法，這樣才不會留存之前的螢幕內容
 		System.out.println("fup");
 		FP.paint(g);
-
 	}
 
-	// 這裡是move方法用來呼叫Rect類中的moveRP
 	private void move() {
 		System.out.println("fum");
 		RP.moveRP();
@@ -156,6 +158,9 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 						break;
 					}
 				}
+				/**
+				 * 用來加速
+				 */
 				if (tmpt > 80) {
 					Thread.sleep(250);
 				} else if (tmpt > 40) {
