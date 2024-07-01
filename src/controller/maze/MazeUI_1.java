@@ -46,9 +46,7 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	/* 剛開始的建構式 */
 	public MazeUI_1() {
 		super("MazeUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +91,7 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 //		setContentPane(contentPane);
 	}
 
+	/* MazeUI_2呼叫時，可以傳一些值 */
 	public MazeUI_1(int x, int y, boolean spbons, int sc) {
 		super("MazeUI");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -171,14 +170,21 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 		}
 		SP.keyPressed(e);
 
+		/* 獲取彩蛋 */
 		if (SP.x == 120 && SP.y == 230 && e.getKeyCode() == 38) {
 			SP.bons = true;
 			SP.repaint();
 		}
 
+		/**
+		 * 取得金幣分數 <br>
+		 * 有點偷吃步，金幣與腳色方塊一樣大這樣判斷式只需要相同位置 <br>
+		 */
 		if (SP.x == CP.x && SP.y == CP.y) {
 			score++;
 			System.out.println("分數 : " + score);
+
+			/* 位置不會是前面出現的五個 */
 			int tmp;
 			do {
 				tmp = rand.nextInt(LCP.size());
@@ -186,6 +192,7 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 			if (LItmp.size() > 5) {
 				LItmp.remove(0);
 			}
+
 			LItmp.add(tmp);
 			CP.x = LCP.get(tmp).getX();
 			CP.y = LCP.get(tmp).getY();
@@ -213,6 +220,7 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 			frame.setVisible(true);
 			dispose();
 		}
+		/* 出現出口 */
 		if (score >= 10) {
 			M1.exit = true;
 			M1.repaint();
@@ -225,6 +233,10 @@ public class MazeUI_1 extends JFrame implements KeyListener {
 
 	}
 
+	/**
+	 * 所有金筆可以放的位置 <br>
+	 * 後來發現應該要全部出現然後刪除不能有的 <br>
+	 */
 	public void inputPosition() {
 		for (int i = 70; i <= 170; i = i + 10) {
 			LCP.add(new CoinPosition(0, i));

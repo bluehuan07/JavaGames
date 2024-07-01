@@ -53,7 +53,9 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
 		setLocationRelativeTo(null);
+
 		addKeyListener(this);
+
 		JOptionPane.showMessageDialog(JumpUI.this, "按空白建開始遊戲");
 
 		GridBagLayout gbl = new GridBagLayout();
@@ -94,12 +96,13 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 	 */
 	@Override
 	public void paint(Graphics g) {
-		super.paint(g); // 呼叫從父類JFrame繼承的paint方法，這樣才不會留存之前的螢幕內容
+		super.paint(g);
 		System.out.println("fup");
 		FP.paint(g);
 	}
 
 	private void move() {
+		/* 分塊往前移動 */
 		System.out.println("fum");
 		RP.moveRP();
 		RP.repaint();
@@ -108,6 +111,7 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
+		/* 按任意建開始遊戲開始判定 */
 		if (SB) {
 			t1.start();
 			SB = false;
@@ -144,23 +148,24 @@ public class JumpUI extends JFrame implements KeyListener, Runnable {
 				move();
 
 				if (BP.y != 200) {
+					/* 圓球跳起下降的過程 */
 					BP.y = BP.y + 10;
 					BP.repaint();
 				}
 
 				if (RP.x < -55) {
+					/* 分數判定 */
 					Score = Score + 1;
 					lblNewLabel.setText("分數： " + Score);
 				}
 
 				if (BP.y >= 170 && BP.y <= 200) {
 					if (RP.x >= 20 && RP.x <= 50) {
+						/* 結束遊戲 */
 						break;
 					}
 				}
-				/**
-				 * 用來加速
-				 */
+				/* 用來加速 */
 				if (tmpt > 80) {
 					Thread.sleep(250);
 				} else if (tmpt > 40) {

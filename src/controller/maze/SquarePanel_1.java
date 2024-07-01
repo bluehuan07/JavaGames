@@ -9,9 +9,7 @@ import javax.swing.JPanel;
 
 public class SquarePanel_1 extends JPanel implements KeyListener {
 
-	/**
-	 * 
-	 */
+	/* 主角方塊 */
 	private static final long serialVersionUID = 1L;
 	private static final int size = 30;
 	int x = 100; // 小球的預設位置
@@ -24,14 +22,6 @@ public class SquarePanel_1 extends JPanel implements KeyListener {
 		this.setOpaque(false);
 	}
 
-	public SquarePanel_1(int x, int y) {
-		super();
-		this.setBackground(null);
-		this.setOpaque(false);
-		this.x = x;
-		this.y = y;
-	}
-
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -39,11 +29,12 @@ public class SquarePanel_1 extends JPanel implements KeyListener {
 		g.setColor(Color.darkGray); // 設定顏色
 		System.out.println("x：" + x + "\ty：" + y);
 		g.fillRect(x, y, size, size); // (x軸, y軸, 球的寬度, 球的高度)
+		/* 如果找到彩蛋位置 */
 		if (bons) {
 			g.setColor(Color.yellow);
-			g.fillOval(x+5, y+5, size-10, size-10);
+			g.fillOval(x + 5, y + 5, size - 10, size - 10);
 		}
-		
+
 	}
 
 	@Override
@@ -88,6 +79,7 @@ public class SquarePanel_1 extends JPanel implements KeyListener {
 
 	}
 
+	/* 不能走的地方 */
 	public boolean ismove(int x, int y, int kc) {
 		if (x == 30 && (y >= 0 && y < 70) && kc == 37) {
 			return false;

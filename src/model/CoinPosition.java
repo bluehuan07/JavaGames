@@ -2,6 +2,8 @@ package model;
 
 public class CoinPosition {
 
+	/* 金幣可以出現的位置 */
+
 	private int x;
 	private int y;
 

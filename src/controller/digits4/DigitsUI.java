@@ -57,7 +57,9 @@ public class DigitsUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(450, 300);
 		setLocationRelativeTo(null);
+
 		JOptionPane.showMessageDialog(DigitsUI.this, "請先決定在1000~9876選一個\n且數字不重複的");
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		GridBagLayout gbl_panel = new GridBagLayout();
@@ -67,10 +69,12 @@ public class DigitsUI extends JFrame {
 		creatallnumber();
 		max = allans.length - 1;
 
+		/* 為了格子大小統一 */
 		JPanel fackPane1 = new JPanel();
 		contentPane.add(fackPane1, DispositionUI.setGridBagConstraint(0.25, 0.25, 0, 1, 1, 1));
 		JPanel fackPane2 = new JPanel();
 		contentPane.add(fackPane2, DispositionUI.setGridBagConstraint(0.25, 0.25, 3, 1, 1, 1));
+
 		JLabel lblNewLabel_1 = new JLabel("我猜是：" + allans[0]);
 		contentPane.add(lblNewLabel_1, DispositionUI.setGridBagConstraint(0.25, 0.25, 1, 0, 2, 1));
 		JLabel lblNewLabel_2 = new JLabel("A：");
@@ -108,6 +112,7 @@ public class DigitsUI extends JFrame {
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				/* 刪除與電腦猜的數字不同AB的數字 */
 				int tmp = allans[0];
 				i = 0;
 				if (textFA.getText().equals("") || textFB.getText().equals("")) {
@@ -150,6 +155,7 @@ public class DigitsUI extends JFrame {
 		});
 	}
 
+	/* 所有數字放入allans */
 	public void creatallnumber() {
 		do {
 			allans[i] = 1023 + k;
@@ -161,6 +167,7 @@ public class DigitsUI extends JFrame {
 		} while (allans[tmp1] != 9876);
 	}
 
+	/* 在創造時確認有沒有出現相同的數字 */
 	public static boolean testnuber(int input) {
 		int a = input / 1000;
 		int b = (input % 1000) / 100;
@@ -178,6 +185,7 @@ public class DigitsUI extends JFrame {
 		return true;
 	}
 
+	/* 判斷有幾個A */
 	public static int testA(String input, String a2b) {
 		int a = 0;
 		for (int i = 0; i < input.length(); i++) {
@@ -188,6 +196,7 @@ public class DigitsUI extends JFrame {
 		return a;
 	}
 
+	/* 判斷有幾個B */
 	public static int testB(String input, String a2b) {
 		int b = 0;
 		for (int i = 0; i < input.length(); i++) {
@@ -200,6 +209,7 @@ public class DigitsUI extends JFrame {
 		return b;
 	}
 
+	/* 判斷數字有沒有相同的AB數 */
 	public static boolean AB(int input, int a2b, int A_, int B_) {
 		String inputs = input + "";
 		String a2bs = a2b + "";

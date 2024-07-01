@@ -53,6 +53,7 @@ public class PickUI extends JFrame {
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 10, 414, 241);
 		contentPane.add(panel);
+		
 		/**
 		 * 本次位置編排皆採用GridBagLayout <br>
 		 * 需要使用 GridBagConstraints 來設置樣式 <br>
